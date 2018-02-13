@@ -202,4 +202,8 @@ const a = [1,2,3,4];
 let double = a.map(((e) => e*2));
 console.log(double) ==> [2,4,6,8]
 
+The example usage here is that I wanted the store the new values in a new array
+
 let logDouble = a.mforEach((e) => console.log(e*2))  ==> [2,4,6,8]
+
+The example usage here is that I wanted to logg the values
