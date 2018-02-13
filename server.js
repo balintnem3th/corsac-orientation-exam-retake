@@ -104,8 +104,9 @@ app.get('/tickets', (req, res) => {
 app.post('/tickets', (req, res) => {
   const sql1 = 'INSERT INTO tickets (reporter, manufacturer, serial_number, description, reported_at) VALUES ?;';
   const date = new Date();
-  const now = date.getDate();
-  const values = ([[req.body.reporter, req.body.manufacturer, req.body.serial_number, req.body.description , now]]);// eslint-disable-line
+  const day = date.getDate();
+  const reportedAt = `2018-01-${day}`;
+  const values = ([[req.body.reporter, req.body.manufacturer, req.body.serial_number, req.body.description ,reportedAt]]);// eslint-disable-line
   conn.query(sql1, [values], (err, row) => {
     if (err) {
       res.status(400);
