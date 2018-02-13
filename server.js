@@ -122,6 +122,22 @@ app.post('/tickets', (req, res) => {
   });
 });
 
+app.delete('/tickets/:id', (req, res) => {
+  const id = req.params.id;
+  const sql1 = `DELETE FROM tickets WHERE tickets.id = ${id}`;
+  console.log('id', id);
+  conn.query(sql1, (err) => {
+    if (err) {
+      res.status(400);
+      res.json({
+        error: err,
+      });
+    }
+    res.status(204);
+    res.json({
+    });
+  });
+});
 
 app.listen(PORT, () => {
   console.log('App listening on :', PORT);

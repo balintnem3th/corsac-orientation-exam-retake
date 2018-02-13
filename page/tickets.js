@@ -47,9 +47,17 @@ function renderTable(data) {
     row.appendChild(reportedAt);
     const deleteButton = document.createElement('button');
     deleteButton.innerHTML = 'DELETE';
+    deleteButton.dataset.id = element.id;
+    deleteButton.addEventListener('click', () => {
+      deleteTicket(element.id);
+    });
     row.appendChild(deleteButton);
     tableBody.appendChild(row);
   });
+}
+
+function deleteTicket(id) {
+  connect('DELETE', `tickets/${id}`, null, null);
 }
 
 console.log(':)');
