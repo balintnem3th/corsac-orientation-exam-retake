@@ -30,7 +30,7 @@ conn.connect((err) => {
 
 conn.query('SELECT * FROM users;', (err, rows) => {// eslint-disable-line
   console.log('Data received from Db:\n');
-  console.log(rows);
+  //console.log(rows);
 });
 
 app.get('/users', (req, res) => {
@@ -47,6 +47,58 @@ app.get('/users', (req, res) => {
       rows: row,
     });
   });
+});
+
+app.get('/tickets', (req, res) => {
+  const manufacturer = req.query.manufacturer;
+  const reporter = req.query.reporter;
+  if ((reporter === undefined) && (manufacturer === undefined)) {
+    const sql1 = 'SELECT * FROM tickets';
+    conn.query(sql1, (err, row) => {
+      if (err) {
+        res.status(400);
+        res.json({
+          error: err,
+        });
+      }
+      res.status(200);
+      res.json({
+        rows: row,
+      });
+    });
+  }
+  else if (reporter !== undefined || reporter === '') {
+    const sql1 = `SELECT * FROM tickets WHERE reporter = ${reporter}`;
+    conn.query(sql1, (err, row) => {
+      if (err) {
+        res.status(400);
+        res.json({
+          error: err,
+        });
+      }
+      res.status(200);
+      res.json({
+        rows: row,
+      });
+    });
+  }
+  else if (manufacturer !== undefined) {
+    const sql1 = `SELECT * FROM tickets WHERE manufacturer = ${manufacturer}`;
+    conn.query(sql1, (err, row) => {
+      if (err) {
+        res.status(400);
+        res.json({
+          error: err,
+        });
+      }
+      res.status(200);
+      res.json({
+        rows: row,
+      });
+    });
+  }
+  console.log(reporter);
+  console.log(manufacturer);
 });
 
 app.listen(PORT, () => {
