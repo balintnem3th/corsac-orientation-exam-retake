@@ -16,7 +16,7 @@ const conn = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '1234',
-  database: 'retake',
+  database: 'orientation_retake',
 });
 
 
@@ -30,23 +30,24 @@ conn.connect((err) => {
 
 conn.query('SELECT * FROM users;', (err, rows) => {// eslint-disable-line
   console.log('Data received from Db:\n');
+  console.log(rows);
 });
 
-// app.get('/get', (req, res) => {
-//   const sql1 = 'SELECT * FROM messages';
-//   conn.query(sql1, (err, row) => {
-//     if (err) {
-//       res.status(400);
-//       res.json({
-//         error: err,
-//       });
-//     }
-//     res.status(200);
-//     res.json({
-//       rows: row,
-//     });
-//   });
-// });
+app.get('/users', (req, res) => {
+  const sql1 = 'SELECT * FROM users';
+  conn.query(sql1, (err, row) => {
+    if (err) {
+      res.status(400);
+      res.json({
+        error: err,
+      });
+    }
+    res.status(200);
+    res.json({
+      rows: row,
+    });
+  });
+});
 
 app.listen(PORT, () => {
   console.log('App listening on :', PORT);
