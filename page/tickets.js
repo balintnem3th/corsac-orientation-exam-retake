@@ -4,9 +4,7 @@
 
 function connect(method, query, callback, send) {
   const xhr = new XMLHttpRequest();
-  // const url = `http://localhost:8080${query}`;
   const url = `http://localhost:8080/${query}`;
-  // console.log('MyURL', url);
   xhr.open(method, url);
   xhr.setRequestHeader('content-type', 'application/json');
   xhr.onreadystatechange = () => {
@@ -60,5 +58,3 @@ function deleteTicket(id) {
   connect('DELETE', `tickets/${id}`, null, []);
   connect('GET', 'tickets', renderTable, null);
 }
-
-console.log(':)');

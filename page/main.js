@@ -4,9 +4,7 @@
 
 function connect(method, query, callback, send) {
   const xhr = new XMLHttpRequest();
-  // const url = `http://localhost:8080${query}`;
   const url = `http://localhost:8080/${query}`;
-  // console.log('MyURL', url);
   xhr.open(method, url);
   xhr.setRequestHeader('content-type', 'application/json');
   xhr.onreadystatechange = () => {
@@ -17,26 +15,6 @@ function connect(method, query, callback, send) {
   };
   xhr.send(JSON.stringify(send));
 }
-
-// function getId (name) {
-//   const xhr = new XMLHttpRequest();
-//   const url = 'http://localhost:8080/users';
-//   xhr.open('GET', url); 
-//   xhr.onreadystatechange = () => {
-//     if (xhr.readyState === 4 && xhr.status === 200) {
-//       const data = JSON.parse(xhr.responseText);
-//       let id = '';
-//       data.rows.forEach((element) => {
-//         if (name === element.name) {
-//           id = element.id;
-//         }
-//         console.log(id);
-//         return id;
-//       });
-//     }
-//   };
-//   xhr.send();
-// }
 
 function renderNames(data) {
   const nameSelect = document.getElementById('names');
@@ -82,4 +60,3 @@ reportButton.addEventListener('click', (e) => {
   connect('POST', 'tickets', null, newTicket);
 });
 
-console.log(':)');
