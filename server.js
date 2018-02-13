@@ -97,8 +97,28 @@ app.get('/tickets', (req, res) => {
       });
     });
   }
-  console.log(reporter);
-  console.log(manufacturer);
+  // console.log(reporter);
+  // console.log(manufacturer);
+});
+
+app.post('/tickets', (req, res) => {
+  const sql1 = 'INSERT INTO tickets (reporter, manufacturer, serial_number, description, reported_at) VALUES ?;';
+  const date = new Date();
+  const now = date.getDate();
+  const values = ([[req.body.reporter, req.body.manufacturer, req.body.serial_number, req.body.description , now]]);// eslint-disable-line
+  conn.query(sql1, [values], (err, row) => {
+    if (err) {
+      res.status(400);
+      console.log(err);
+      res.json({
+        error: err,
+      });
+    }
+    res.status(200);
+    res.json({
+      rows: row,
+    });
+  });
 });
 
 

@@ -18,10 +18,6 @@ function connect(method, query, callback, send) {
   xhr.send(JSON.stringify(send));
 }
 
-window.addEventListener('load', () => {
-  connect('GET', 'users', renderNames, null);
-});
-
 function renderNames(data) {
   const nameSelect = document.getElementById('names');
   names.innerHTML= '';
@@ -33,4 +29,29 @@ function renderNames(data) {
   });
 }
 
+window.addEventListener('load', () => {
+  connect('GET', 'users', renderNames, null);
+});
+
+function createTciket() {
+  const reporter = document.getElementById('names').value;
+  const manufacturer = document.getElementById('manufacturer').value;
+  const serialNumber = document.getElementById('serial-number').value;
+  const description = document.getElementById('description').value;
+  const newTicket = {
+    reporter,
+    manufacturer,
+    serial_number: serialNumber,
+    description,
+  };
+  console.log(newTicket);
+  return newTicket;
+}
+
+const reportButton = document.getElementById('report');
+reportButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  const newTicket = createTciket();
+  connect('POST', 'tickets', null, newTicket);
+});
 console.log(':)');
