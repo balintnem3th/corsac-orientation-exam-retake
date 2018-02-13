@@ -128,7 +128,7 @@ app.delete('/tickets/:id', (req, res) => {
   console.log('id', id);
   conn.query(sql1, (err) => {
     if (err) {
-      res.status(400);
+      res.status(500);
       res.json({
         error: err,
       });

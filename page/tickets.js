@@ -57,7 +57,8 @@ function renderTable(data) {
 }
 
 function deleteTicket(id) {
-  connect('DELETE', `tickets/${id}`, null, null);
+  connect('DELETE', `tickets/${id}`, null, []);
+  connect('GET', 'tickets', renderTable, null);
 }
 
 console.log(':)');

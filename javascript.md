@@ -187,5 +187,19 @@ Example query:
 ## 2) Question time
 
 ### a, What's the difference between Array.prototype.forEach and Array.prototype.map?
+Map iterates through the array and does the required function(transforms
+the array), and comes
+back with a new array which has the same length as the original one.
+
+forEach also iterates through the arrayand does the function we want on it,
+but it doesnt transform the array;
+
 
 ### b, Write an example usage of the map and forEach function.
+//Psuedo Code//
+const a = [1,2,3,4];
+
+let double = a.map(((e) => e*2));
+console.log(double) ==> [2,4,6,8]
+
+let logDouble = a.mforEach((e) => console.log(e*2))  ==> [2,4,6,8]
